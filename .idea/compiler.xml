@@ -10,5 +10,6 @@
         <module name="TaskDins" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="6" />
   </component>
 </project>

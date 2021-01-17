@@ -133,7 +133,7 @@ public class HabrPage {
      */
     public void inputSearchField(String str) {
         searchField.sendKeys(str);
-        logger.info("The search field is filled with " + str);
+        logger.info("The search field is filled with \"{}\"", str);
     }
 
     /**
