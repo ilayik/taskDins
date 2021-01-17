@@ -1,16 +1,22 @@
 package ru.com.habr;
 
-import org.junit.Assert;
+
+import lombok.Getter;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * Класс для создания и упраления элементами web страницы
+ */
+@Getter
 public class HabrPage {
-    /**
-     * конструктор класса, занимающийся инициализацией полей класса
-     */
+    private static final Logger logger = LoggerFactory.getLogger(TestHabr.class);
+
     public WebDriver driver;
 
     public HabrPage(WebDriver driver) {
@@ -114,12 +120,12 @@ public class HabrPage {
     @FindBy(xpath = "/html/body/div[1]/div[3]/div/div[2]/div[1]/div[1]/div/a[6]/h3")
     private WebElement hrefDinsEmployees;
 
-
     /**
      * Метод для нажатия Enter в поле поиска
      */
     public void searchFieldEnter() {
         searchField.sendKeys(Keys.ENTER);
+        logger.info("Enter pressed in the search field");
     }
 
     /**
@@ -127,6 +133,7 @@ public class HabrPage {
      */
     public void inputSearchField(String str) {
         searchField.sendKeys(str);
+        logger.info("The search field is filled with " + str);
     }
 
     /**
@@ -134,6 +141,7 @@ public class HabrPage {
      */
     public void clickSearchBtn() {
         searchBtn.click();
+        logger.info("Open search field");
     }
 
     /**
@@ -141,13 +149,15 @@ public class HabrPage {
      */
     public void clickHrefHubsAndCompany() {
         hrefHabsAndCompany.click();
+        logger.info("Clicked link \"Хабы и Компании\"");
     }
 
     /**
-     * Метод для нажатия ссылки "Хабы и Компании"
+     * Метод для нажатия ссылки "Блог компании DINS"
      */
     public void clickHrefDins() {
         hrefDins.click();
+        logger.info("Clicked link \"Блог компании DINS\"");
     }
 
     /**
@@ -155,30 +165,7 @@ public class HabrPage {
      */
     public void clickHrefDinsProfile() {
         hrefDinsProfile.click();
-    }
-
-    /**
-     * Метод для проверки существования заголовка "О компании"
-     */
-    public void titleCompanyCheck() {
-        String titleCompanyText = titleCompany.getText();
-        Assert.assertEquals("О компании", titleCompanyText);
-    }
-
-    /**
-     * Метод для проверки существования заголовка "Ключевые технологии:"
-     */
-    public void titleTopTechnologyCheck() {
-        String titleTopTechnologyText = titleTopTechnology.getText();
-        Assert.assertEquals("Ключевые технологии:", titleTopTechnologyText);
-    }
-
-    /**
-     * Метод для проверки даты основания компании
-     */
-    public void dateOfCreationCheck() {
-        String dateOfCreationText = dateOfCreation.getText();
-        Assert.assertEquals("1998 год", dateOfCreationText);
+        logger.info("Clicked link \"Профиль\"");
     }
 
     /**
@@ -186,6 +173,7 @@ public class HabrPage {
      */
     public void clickHrefLanguageSettings() {
         languageSettings.click();
+        logger.info("Clicked link language settings");
     }
 
     /**
@@ -193,6 +181,7 @@ public class HabrPage {
      */
     public void clickEnglishLanguageInterface() {
         englishLanguageInterface.click();
+        logger.info("Clicked link english language interface");
     }
 
     /**
@@ -200,64 +189,6 @@ public class HabrPage {
      */
     public void clickLanguageSettingsSave() {
         languageSettingsSave.click();
+        logger.info("Clicked link english language save");
     }
-
-    /**
-     * Метод для проверки перевода вкладки "Блог"
-     */
-    public void checkTranslateBlog() {
-        String dinsBlogText = hrefDinsBlog.getText();
-        Assert.assertEquals("BLOG", dinsBlogText);
-    }
-
-    /**
-     * Метод для проверки перевода вкладки "Новости"
-     */
-    public void checkTranslateNews() {
-        String dinsNewsText = hrefDinsNews.getText();
-        Assert.assertEquals("NEWS", dinsNewsText);
-    }
-
-    /**
-     * Метод для проверки перевода вкладки "Вакансии"
-     */
-    public void checkTranslateVacancies() {
-        String dinsVacanciesText = hrefDinsVacancies.getText();
-        Assert.assertEquals("VACANCIES", dinsVacanciesText);
-    }
-
-    /**
-     * Метод проверки перевода вкладки "Подписчики"
-     */
-    public void checkTranslateSubscribers() {
-        String dinsSubscribersText = hrefDinsSubscribers.getText().substring(0, 11);
-        Assert.assertEquals("SUBSCRIBERS", dinsSubscribersText);
-    }
-
-    /**
-     * Метод проверки перевода вкладки "Сотрудники"
-     */
-    public void checkTranslateEmployees() {
-        String dinsEmployeesText = hrefDinsEmployees.getText().substring(0, 9);
-        Assert.assertEquals("EMPLOYEES", dinsEmployeesText);
-    }
-
-    /**
-     * Метод проверки перевода вкладки "Профиль"
-     */
-    public void checkTranslateProfile() {
-        String dinsEmployeesText = hrefDinsProfile.getText();
-        Assert.assertEquals("PROFILE", dinsEmployeesText);
-    }
-
-    /**
-     * Метод проверки перевода даты основания
-     */
-
-    public void checkTranslateDateOfCreation() {
-        String dateOfCreationText = dateOfCreation.getText();
-        Assert.assertEquals("Since 1998", dateOfCreationText);
-    }
-
-
 }
